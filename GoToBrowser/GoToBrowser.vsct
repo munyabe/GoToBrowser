@@ -39,8 +39,12 @@
          group as the part of a menu contained between two lines. The parent of a group
          must be a menu. -->
     <Groups>
-      <Group guid="guidGoToBrowserCmdSet" id="EditorContextMenuGroup" priority="0x0600">
+      <Group guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_CODEWIN"/>
+      </Group>
+
+      <Group guid="guidGoToBrowserCmdSet" id="xamlEditorContextMenuGroup" priority="0x0601">
+        <Parent guid="guidXamlEditorCmdSet" id="contextMenu"/>
       </Group>
     </Groups>
 
@@ -57,13 +61,23 @@
           If you do not want an image next to your command, remove the Icon node or set it to <Icon guid="guidOfficeIcon" id="msotcidNoIcon" /> -->
 
       <Button guid="guidGoToBrowserCmdSet" id="goToBrowserCommand" priority="0x0100" type="Button">
-        <Parent guid="guidGoToBrowserCmdSet" id="EditorContextMenuGroup" />
+        <Parent guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" />
         <Icon guid="commandImages" id="browser" />
         <Strings>
           <CommandName>goToBrowserCommand</CommandName>
           <ButtonText>Go to Browser</ButtonText>
         </Strings>
       </Button>
+
+      <Button guid="guidGoToBrowserCmdSet" id="goToBrowserCommand" priority="0x0100" type="Button">
+        <Parent guid="guidGoToBrowserCmdSet" id="xamlEditorContextMenuGroup" />
+        <Icon guid="commandImages" id="browser" />
+        <Strings>
+          <CommandName>goToBrowserCommand</CommandName>
+          <ButtonText>Go to Browser</ButtonText>
+        </Strings>
+      </Button>
+
     </Buttons>
 
     <!--The bitmaps section is used to define the bitmaps that are used for the commands.-->
@@ -88,8 +102,13 @@
 
     <!-- This is the guid used to group the menu commands together -->
     <GuidSymbol name="guidGoToBrowserCmdSet" value="{55ba95ee-03a2-4f1f-8107-8148a9dfea43}">
-      <IDSymbol name="EditorContextMenuGroup" value="0x1020" />
+      <IDSymbol name="editorContextMenuGroup" value="0x1020" />
+      <IDSymbol name="xamlEditorContextMenuGroup" value="0x1021" />
       <IDSymbol name="goToBrowserCommand" value="0x0100" />
+    </GuidSymbol>
+
+    <GuidSymbol name="guidXamlEditorCmdSet" value="{4C87B692-1202-46AA-B64C-EF01FAEC53DA}">
+      <IDSymbol name="contextMenu" value="0x0103" />
     </GuidSymbol>
 
     <GuidSymbol name="commandImages" value="{AA27C05A-2E1A-4AFC-B948-38210F0B2321}" >
