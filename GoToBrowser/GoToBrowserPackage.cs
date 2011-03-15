@@ -40,7 +40,12 @@ namespace GoToBrowser
         /// <summary>
         /// URLフォーマットを<c>.suo</c>ファイルに保存する際のキーです。
         /// </summary>
-        private const string URL_FORMAT_SUO_KEY = "OpenInBrouser.URLFormat";
+        private const string URL_FORMAT_SUO_KEY = "GoToBrouser.URLFormat";
+
+        /// <summary>
+        /// <c>Go to Brouser</c>を実行するコマンドです。
+        /// </summary>
+        private MenuCommand _goToBrowserCommand;
 
         /// <summary>
         /// オプションの設定です。
@@ -59,31 +64,18 @@ namespace GoToBrowser
             {
                 var persistence = this.GetService<SVsSolutionPersistence, IVsSolutionPersistence>();
                 persistence.SavePackageUserOpts(this, URL_FORMAT_SUO_KEY);
+
+                SetCommandVisible();
             };
 
             var commandService = this.GetService<IMenuCommandService, OleMenuCommandService>();
             var goToBrowserCommandId = new CommandID(GuidList.guidGoToBrowserCmdSet, (int)PkgCmdIDList.goToBrowserCommand);
-            var menuItem = new MenuCommand(GoToBrowserCallback, goToBrowserCommandId);
-            commandService.AddCommand(menuItem);
+            _goToBrowserCommand = new MenuCommand(GoToBrowserCallback, goToBrowserCommandId);
+            commandService.AddCommand(_goToBrowserCommand);
 
             var solution = this.GetService<SVsSolution, IVsSolution>();
             uint solutionEventCoockie;
             solution.AdviseSolutionEvents(this, out solutionEventCoockie);
-        }
-
-        /// <summary>
-        /// <c>Go to Browser</c>コマンドを実行したときの処理です。
-        /// </summary>
-        private void GoToBrowserCallback(object sender, EventArgs e)
-        {
-            try
-            {
-                GoToBrowser();
-            }
-            catch (Exception ex)
-            {
-                ShowMessageBox(string.Format(CultureInfo.CurrentCulture, "{0}", ex.Message), OLEMSGICON.OLEMSGICON_WARNING);
-            }
         }
 
         /// <summary>
@@ -135,15 +127,26 @@ namespace GoToBrowser
             return dialogPage;
         }
 
-        private void GoToBrowser()
+        /// <summary>
+        /// <c>Go to Browser</c>コマンドを実行したときの処理です。
+        /// </summary>
+        private void GoToBrowserCallback(object sender, EventArgs e)
         {
-            string urlFormat = _option.UrlFormat;
-            if (string.IsNullOrWhiteSpace(urlFormat))
+            try
             {
-                ShowMessageBox(Resources.RootUrlIsEmpty, OLEMSGICON.OLEMSGICON_INFO);
-                return;
+                ExecuteGoToBrowser();
             }
+            catch (Exception ex)
+            {
+                ShowMessageBox(string.Format(CultureInfo.CurrentCulture, "{0}", ex.Message), OLEMSGICON.OLEMSGICON_WARNING);
+            }
+        }
 
+        /// <summary>
+        /// <c>Go to Browser</c>コマンドを実行します。
+        /// </summary>
+        private void ExecuteGoToBrowser()
+        {
             var dte = this.GetService<DTE>();
             string solutionPath = Path.GetDirectoryName(dte.Solution.FullName);
             var document = dte.ActiveDocument;
@@ -161,10 +164,23 @@ namespace GoToBrowser
             addValue(GeneralOption.LINE_NUMBER_KEY, GetCurrentLineNumber(document).ToString());
             addValue(GeneralOption.SOLUTION_NAME_KEY, _option.SolutionName);
 
-            var resultUri = StringUtil.Format(urlFormat, values);
+            var resultUri = StringUtil.Format(_option.UrlFormat, values);
             dte.ExecuteCommand("navigate", string.Format("{0} /new /ext", resultUri));
         }
 
+        /// <summary>
+        /// <c>Go to Brouser</c>コマンドの表示状態を設定します。
+        /// </summary>
+        private void SetCommandVisible()
+        {
+            _goToBrowserCommand.Visible = string.IsNullOrWhiteSpace(_option.UrlFormat) == false;
+        }
+
+        /// <summary>
+        /// <c>Visual Studio</c>のメッセージボックスを表示します。
+        /// </summary>
+        /// <param name="message">表示するメッセージ</param>
+        /// <param name="icon">表示するアイコン</param>
         private void ShowMessageBox(string message, OLEMSGICON icon)
         {
             var uiShell = this.GetService<SVsUIShell, IVsUIShell>();

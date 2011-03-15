@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using EnvDTE;
+using GoToBrowser.Utils;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell.Interop;
-using GoToBrowser.Utils;
 
 namespace GoToBrowser
 {
@@ -30,6 +30,8 @@ namespace GoToBrowser
 
             var persistence = this.GetService<SVsSolutionPersistence, IVsSolutionPersistence>();
             persistence.LoadPackageUserOpts(this, URL_FORMAT_SUO_KEY);
+
+            SetCommandVisible();
 
             return VSConstants.S_OK;
         }

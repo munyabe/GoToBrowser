@@ -63,6 +63,8 @@
       <Button guid="guidGoToBrowserCmdSet" id="goToBrowserCommand" priority="0x0100" type="Button">
         <Parent guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" />
         <Icon guid="commandImages" id="browser" />
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>
           <CommandName>goToBrowserCommand</CommandName>
           <ButtonText>Go to Browser</ButtonText>
@@ -72,6 +74,8 @@
       <Button guid="guidGoToBrowserCmdSet" id="goToBrowserCommand" priority="0x0100" type="Button">
         <Parent guid="guidGoToBrowserCmdSet" id="xamlEditorContextMenuGroup" />
         <Icon guid="commandImages" id="browser" />
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>
           <CommandName>goToBrowserCommand</CommandName>
           <ButtonText>Go to Browser</ButtonText>
