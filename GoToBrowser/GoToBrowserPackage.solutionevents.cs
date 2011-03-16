@@ -1,11 +1,15 @@
 ﻿using System.IO;
 using EnvDTE;
+using GoToBrowser.Options;
 using GoToBrowser.Utils;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell.Interop;
 
 namespace GoToBrowser
 {
+    /// <summary>
+    /// <see cref="IVsSolutionEvents"/>を実装する部分クラスです。
+    /// </summary>
     partial class GoToBrowserPackage : IVsSolutionEvents
     {
         public int OnAfterCloseSolution(object pUnkReserved)
@@ -26,10 +30,10 @@ namespace GoToBrowser
         public int OnAfterOpenSolution(object pUnkReserved, int fNewSolution)
         {
             var dte = this.GetService<DTE>();
-            _option.SolutionName = Path.GetFileNameWithoutExtension(dte.Solution.FullName);
+            _config.SolutionName = Path.GetFileNameWithoutExtension(dte.Solution.FullName);
 
             var persistence = this.GetService<SVsSolutionPersistence, IVsSolutionPersistence>();
-            persistence.LoadPackageUserOpts(this, URL_FORMAT_SUO_KEY);
+            persistence.LoadPackageUserOpts(this, GeneralConfig.URL_FORMAT_SUO_KEY);
 
             SetCommandVisible();
 

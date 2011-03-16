@@ -120,7 +120,19 @@
   <data name="CommandIsNotExecutable" xml:space="preserve">
     <value>"Go to Browser" が実行できません。</value>
   </data>
-  <data name="RootUrlIsEmpty" xml:space="preserve">
-    <value>Root Url が設定されていません。ツール &gt; オプション &gt; Go to Browser から指定してください。</value>
+  <data name="ConfigureCommand" xml:space="preserve">
+    <value>Go to Browser の設定</value>
+  </data>
+  <data name="FileNameKeyDescription" xml:space="preserve">
+    <value>現在のファイル名です。</value>
+  </data>
+  <data name="FilePathKeyDescription" xml:space="preserve">
+    <value>現在のファイルの相対パスです。</value>
+  </data>
+  <data name="LineNumberKeyDescription" xml:space="preserve">
+    <value>現在の行数です。</value>
+  </data>
+  <data name="SolutionNameKeyDescription" xml:space="preserve">
+    <value>現在のソリューション名です。</value>
   </data>
 </root>

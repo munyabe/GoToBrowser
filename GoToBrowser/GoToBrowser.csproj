@@ -44,13 +44,17 @@
       <Private>false</Private>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.Shell.Immutable.10.0" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="EnvDTE">
@@ -110,18 +114,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ids\Guids.cs" />
-    <Compile Include="Utils\IServiceProviderExtensions.cs" />
-    <Compile Include="Options\GeneralOption.cs">
-      <SubType>Component</SubType>
+    <Compile Include="Options\GeneralConfig.cs" />
+    <Compile Include="Options\ConfigWindow.xaml.cs">
+      <DependentUpon>ConfigWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\IServiceProviderExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GoToBrowserPackage.cs" />
-    <Compile Include="Options\GeneralOptionPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Options\GeneralOptionPage.Designer.cs">
-      <DependentUpon>GeneralOptionPage.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ids\PkgCmdID.cs" />
     <Compile Include="Properties\Resources.ja-JP.Designer.cs">
@@ -137,9 +136,6 @@
     <Compile Include="Utils\StringUtil.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Options\GeneralOptionPage.resx">
-      <DependentUpon>GeneralOptionPage.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -182,6 +178,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Options\ConfigWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>

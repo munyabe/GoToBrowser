@@ -32,25 +32,19 @@ namespace GoToBrowser
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
     // This attribute is needed to let the shell know that this package exposes some menus.
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [ProvideOptionPage(typeof(GeneralOption), "Go to Browser", "General", 101, 106, true)]
     [ProvideAutoLoad(UIContextGuids.SolutionExists)]
     [Guid(GuidList.guidGoToBrowserPkgString)]
     public sealed partial class GoToBrowserPackage : Package
     {
         /// <summary>
-        /// URLフォーマットを<c>.suo</c>ファイルに保存する際のキーです。
+        /// <c>Go to Brouser</c>の設定です。
         /// </summary>
-        private const string URL_FORMAT_SUO_KEY = "GoToBrouser.URLFormat";
+        private GeneralConfig _config = new GeneralConfig();
 
         /// <summary>
         /// <c>Go to Brouser</c>を実行するコマンドです。
         /// </summary>
         private MenuCommand _goToBrowserCommand;
-
-        /// <summary>
-        /// オプションの設定です。
-        /// </summary>
-        private GeneralOption _option;
 
         /// <summary>
         /// パッケージを初期化します。
@@ -59,19 +53,15 @@ namespace GoToBrowser
         {
             base.Initialize();
 
-            _option = GetDialogPage<GeneralOption>();
-            _option.SettingsSaved += (sender, e) =>
-            {
-                var persistence = this.GetService<SVsSolutionPersistence, IVsSolutionPersistence>();
-                persistence.SavePackageUserOpts(this, URL_FORMAT_SUO_KEY);
-
-                SetCommandVisible();
-            };
-
             var commandService = this.GetService<IMenuCommandService, OleMenuCommandService>();
             var goToBrowserCommandId = new CommandID(GuidList.guidGoToBrowserCmdSet, (int)PkgCmdIDList.goToBrowserCommand);
             _goToBrowserCommand = new MenuCommand(GoToBrowserCallback, goToBrowserCommandId);
             commandService.AddCommand(_goToBrowserCommand);
+
+            var settingCommandID = new CommandID(GuidList.guidGoToBrowserCmdSet, (int)PkgCmdIDList.configureCommand);
+            var configureCommand = new OleMenuCommand(ConfigureCallback, settingCommandID);
+            configureCommand.Text = Resources.ConfigureCommand;
+            commandService.AddCommand(configureCommand);
 
             var solution = this.GetService<SVsSolution, IVsSolution>();
             uint solutionEventCoockie;
@@ -79,24 +69,25 @@ namespace GoToBrowser
         }
 
         /// <summary>
-        /// <c>.suo</c>ファイルを読み込む際の処理です。
+        /// .suo ファイルを読み込む際の処理です。
         /// </summary>
+        /// <remarks><c>.suo</c>ファイルに<paramref name="key"/>が存在しない場合は呼び出されません。</remarks>
         protected override void OnLoadOptions(string key, Stream stream)
         {
             using (var reader = new BinaryReader(stream))
             {
-                _option.UrlFormat = reader.ReadString();
+                _config.UrlFormat = reader.ReadString();
             }
         }
 
         /// <summary>
-        /// <c>.suo</c>ファイルを保存する際の処理です。
+        /// .suo ファイルを保存する際の処理です。
         /// </summary>
         protected override void OnSaveOptions(string key, Stream stream)
         {
             using (var writer = new BinaryWriter(stream))
             {
-                writer.Write(_option.UrlFormat);
+                writer.Write(_config.UrlFormat);
             }
 
             base.OnSaveOptions(key, stream);
@@ -112,22 +103,6 @@ namespace GoToBrowser
         }
 
         /// <summary>
-        /// オプションの設定を取得します。
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        private T GetDialogPage<T>() where T : DialogPage
-        {
-            var dialogPage = GetDialogPage(typeof(T)) as T;
-            if (dialogPage == null)
-            {
-                throw new InvalidOperationException(string.Format("The dialog page [{0}] is not found.", typeof(T).Name));
-            }
-
-            return dialogPage;
-        }
-
-        /// <summary>
         /// <c>Go to Browser</c>コマンドを実行したときの処理です。
         /// </summary>
         private void GoToBrowserCallback(object sender, EventArgs e)
@@ -140,6 +115,23 @@ namespace GoToBrowser
             {
                 ShowMessageBox(string.Format(CultureInfo.CurrentCulture, "{0}", ex.Message), OLEMSGICON.OLEMSGICON_WARNING);
             }
+        }
+
+        /// <summary>
+        /// <c>Go to Browser</c>の設定コマンドを実行したときの処理です。
+        /// </summary>
+        private void ConfigureCallback(object sender, EventArgs e)
+        {
+            var window = new ConfigWindow(_config);
+            window.Apply += (applySender, applyArgs) =>
+            {
+                var persistence = this.GetService<SVsSolutionPersistence, IVsSolutionPersistence>();
+                persistence.SavePackageUserOpts(this, GeneralConfig.URL_FORMAT_SUO_KEY);
+
+                SetCommandVisible();
+            };
+
+            window.ShowDialog();
         }
 
         /// <summary>
@@ -159,12 +151,12 @@ namespace GoToBrowser
             };
 
             var filePath = document.FullName.Replace(solutionPath, string.Empty);
-            addValue(GeneralOption.FILE_NAME_KEY, Path.GetFileName(filePath));
-            addValue(GeneralOption.FILE_PATH_KEY, filePath);
-            addValue(GeneralOption.LINE_NUMBER_KEY, GetCurrentLineNumber(document).ToString());
-            addValue(GeneralOption.SOLUTION_NAME_KEY, _option.SolutionName);
+            addValue(GeneralConfig.FILE_NAME_KEY, Path.GetFileName(filePath));
+            addValue(GeneralConfig.FILE_PATH_KEY, filePath);
+            addValue(GeneralConfig.LINE_NUMBER_KEY, GetCurrentLineNumber(document).ToString());
+            addValue(GeneralConfig.SOLUTION_NAME_KEY, _config.SolutionName);
 
-            var resultUri = StringUtil.Format(_option.UrlFormat, values);
+            var resultUri = StringUtil.Format(_config.UrlFormat, values);
             dte.ExecuteCommand("navigate", string.Format("{0} /new /ext", resultUri));
         }
 
@@ -173,11 +165,11 @@ namespace GoToBrowser
         /// </summary>
         private void SetCommandVisible()
         {
-            _goToBrowserCommand.Visible = string.IsNullOrWhiteSpace(_option.UrlFormat) == false;
+            _goToBrowserCommand.Visible = string.IsNullOrWhiteSpace(_config.UrlFormat) == false;
         }
 
         /// <summary>
-        /// <c>Visual Studio</c>のメッセージボックスを表示します。
+        /// Visual Studio のメッセージボックスを表示します。
         /// </summary>
         /// <param name="message">表示するメッセージ</param>
         /// <param name="icon">表示するアイコン</param>

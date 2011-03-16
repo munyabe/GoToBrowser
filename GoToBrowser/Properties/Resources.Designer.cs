@@ -61,7 +61,7 @@ namespace GoToBrowser.Properties {
         }
         
         /// <summary>
-        ///   &quot;Go to Browser&quot; Command is not executable. に類似しているローカライズされた文字列を検索します。
+        ///   &quot;Go to Browser&quot; command is not executable. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CommandIsNotExecutable {
             get {
@@ -70,11 +70,47 @@ namespace GoToBrowser.Properties {
         }
         
         /// <summary>
-        ///   Root url  is not set up. In order to specify it, you have to go Tools &gt; Options &gt; Go to Browser. に類似しているローカライズされた文字列を検索します。
+        ///   Go to Browser... に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string RootUrlIsEmpty {
+        internal static string ConfigureCommand {
             get {
-                return ResourceManager.GetString("RootUrlIsEmpty", resourceCulture);
+                return ResourceManager.GetString("ConfigureCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Currnt file name. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string FileNameKeyDescription {
+            get {
+                return ResourceManager.GetString("FileNameKeyDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Current file relative path. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string FilePathKeyDescription {
+            get {
+                return ResourceManager.GetString("FilePathKeyDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Current line number. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LineNumberKeyDescription {
+            get {
+                return ResourceManager.GetString("LineNumberKeyDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Current solution name. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SolutionNameKeyDescription {
+            get {
+                return ResourceManager.GetString("SolutionNameKeyDescription", resourceCulture);
             }
         }
     }
