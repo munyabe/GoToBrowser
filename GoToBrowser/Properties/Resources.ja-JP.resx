@@ -123,6 +123,9 @@
   <data name="ConfigureCommand" xml:space="preserve">
     <value>Go to Browser の設定</value>
   </data>
+  <data name="ConfigWindowTitle" xml:space="preserve">
+    <value>{0} - Go to Browser の設定</value>
+  </data>
   <data name="FileNameKeyDescription" xml:space="preserve">
     <value>現在のファイル名です。</value>
   </data>

@@ -32,7 +32,7 @@ namespace GoToBrowser.Options
             _config = config;
             urlFormat.Text = _config.UrlFormat;
 
-            Title = Properties.Resources.ConfigureCommand;
+            Title = string.Format(Properties.Resources.ConfigWindowTitle, config.SolutionName);
             DataContext = new UrlKeyFormat[]
             {
                 new UrlKeyFormat(GeneralConfig.FILE_NAME_KEY, Properties.Resources.FileNameKeyDescription),
@@ -40,6 +40,8 @@ namespace GoToBrowser.Options
                 new UrlKeyFormat(GeneralConfig.LINE_NUMBER_KEY, Properties.Resources.LineNumberKeyDescription),
                 new UrlKeyFormat(GeneralConfig.SOLUTION_NAME_KEY, Properties.Resources.SolutionNameKeyDescription)
             };
+
+            Loaded += (sender, e) => MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
         }
 
         /// <summary>
@@ -90,13 +92,14 @@ namespace GoToBrowser.Options
         private class UrlKeyFormat
         {
             public string Key { get; private set; }
-            public string DisplayKey { get; private set; }
+            public string Abbreviation { get; private set; }
             public string Description { get; private set; }
 
             public UrlKeyFormat(string key, string description)
             {
-                Key = string.Format("{{{0}}}", key);
-                DisplayKey = string.Format("{{{0}}} or {{{1}}}", key, StringUtil.GetUpperCases(key));
+                const string keyFormat = "{{{0}}}";
+                Key = string.Format(keyFormat, key);
+                Abbreviation = string.Format(keyFormat, StringUtil.GetUpperCases(key));
                 Description = description;
             }
         }
