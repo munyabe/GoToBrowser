@@ -2,7 +2,7 @@
 // MUST match PkgCmdID.h
 using System;
 
-namespace GoToBrowser
+namespace GoToBrowser.Ids
 {
     static class PkgCmdIDList
     {

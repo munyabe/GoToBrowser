@@ -2,7 +2,7 @@
 // MUST match guids.h
 using System;
 
-namespace GoToBrowser
+namespace GoToBrowser.Ids
 {
     static class GuidList
     {

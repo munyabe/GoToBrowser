@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using EnvDTE;
+using GoToBrowser.Ids;
 using GoToBrowser.Options;
 using GoToBrowser.Properties;
 using GoToBrowser.Utils;
@@ -157,7 +158,7 @@ namespace GoToBrowser
             addValue(GeneralConfig.SOLUTION_NAME_KEY, _config.SolutionName);
 
             var resultUri = StringUtil.Format(_config.UrlFormat, values);
-            dte.ExecuteCommand("navigate", string.Format("{0} /new /ext", resultUri));
+            dte.ExecuteCommand("navigate", string.Format("{0} /ext", resultUri));
         }
 
         /// <summary>

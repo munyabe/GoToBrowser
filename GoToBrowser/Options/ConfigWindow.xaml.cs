@@ -95,6 +95,9 @@ namespace GoToBrowser.Options
             public string Abbreviation { get; private set; }
             public string Description { get; private set; }
 
+            /// <summary>
+            /// インスタンスを初期化します。
+            /// </summary>
             public UrlKeyFormat(string key, string description)
             {
                 const string keyFormat = "{{{0}}}";
