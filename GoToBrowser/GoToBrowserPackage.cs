@@ -30,7 +30,7 @@ namespace GoToBrowser
     [PackageRegistration(UseManagedResourcesOnly = true)]
     // This attribute is used to register the informations needed to show the this package
     // in the Help/About dialog of Visual Studio.
-    [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
+    [InstalledProductRegistration("#110", "#112", "1.1", IconResourceID = 400)]
     // This attribute is needed to let the shell know that this package exposes some menus.
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [ProvideAutoLoad(UIContextGuids.SolutionExists)]
@@ -151,7 +151,7 @@ namespace GoToBrowser
                 values[StringUtil.GetUpperCases(keyName)] = value;
             };
 
-            var filePath = document.FullName.Replace(solutionPath, string.Empty);
+            var filePath = document.FullName.Replace(solutionPath, string.Empty).Replace("\\", "/");
             addValue(GeneralConfig.FILE_NAME_KEY, Path.GetFileName(filePath));
             addValue(GeneralConfig.FILE_PATH_KEY, filePath);
             addValue(GeneralConfig.LINE_NUMBER_KEY, GetCurrentLineNumber(document).ToString());
