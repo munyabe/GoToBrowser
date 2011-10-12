@@ -118,6 +118,7 @@
     <Compile Include="Options\ConfigWindow.xaml.cs">
       <DependentUpon>ConfigWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Guard.cs" />
     <Compile Include="Utils\IServiceProviderExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GoToBrowserPackage.cs" />

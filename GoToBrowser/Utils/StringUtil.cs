@@ -17,6 +17,8 @@ namespace GoToBrowser.Utils
         /// <returns>書式項目が<paramref name="newValues"/>の対応する文字列に置換された<paramref name="format"/>の文字列</returns>
         public static string Format(string format, IDictionary<string, string> newValues)
         {
+            Guard.ArgumentNotNull(newValues, "newValues");
+
             if (string.IsNullOrWhiteSpace(format))
             {
                 return string.Empty;
