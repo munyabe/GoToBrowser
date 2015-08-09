@@ -34,17 +34,31 @@
     group; your package should define its own command set in order to avoid collisions
     with command ids defined by other packages. -->
 
+    <Menus>
+      <Menu guid="guidGoToBrowserCmdSet" id="editorContextMenu" priority="0x0001" type="Menu">
+        <Parent guid="guidGoToBrowserCmdSet" id="editorRootContextMenu"/>
+        <Strings>
+          <ButtonText>Go to Browser</ButtonText>
+          <CommandName>Go to Browser</CommandName>
+        </Strings>
+      </Menu>
+    </Menus>
+    
     <!-- In this section you can define new menu groups. A menu group is a container for
          other menus or buttons (commands); from a visual point of view you can see the
          group as the part of a menu contained between two lines. The parent of a group
          must be a menu. -->
     <Groups>
-      <Group guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" priority="0x0600">
+      <Group guid="guidGoToBrowserCmdSet" id="editorRootContextMenu" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_CODEWIN" />
       </Group>
 
-      <Group guid="guidGoToBrowserCmdSet" id="xamlEditorContextMenuGroup" priority="0x0601">
+      <Group guid="guidGoToBrowserCmdSet" id="editorRootContextMenu" priority="0x0601">
         <Parent guid="guidXamlEditorCmdSet" id="contextMenu" />
+      </Group>
+
+      <Group guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" priority="0x0603">
+        <Parent guid="guidGoToBrowserCmdSet" id="editorContextMenu" />
       </Group>
 
       <Group guid="guidGoToBrowserCmdSet" id="solutionContextMenuGroup" priority="0x0602">
@@ -124,6 +138,9 @@
       <IDSymbol name="editorContextMenuGroup" value="0x1020" />
       <IDSymbol name="xamlEditorContextMenuGroup" value="0x1021" />
       <IDSymbol name="solutionContextMenuGroup" value="0x1022" />
+
+      <IDSymbol name="editorContextMenu" value="0x1023" />
+      <IDSymbol name="editorRootContextMenu" value="0x1024" />
       <!-- Command -->
       <IDSymbol name="goToBrowserCommand" value="0x0100" />
       <IDSymbol name="configureCommand" value="0x0101" />
