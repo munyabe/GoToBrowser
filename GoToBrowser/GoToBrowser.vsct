@@ -49,20 +49,20 @@
          group as the part of a menu contained between two lines. The parent of a group
          must be a menu. -->
     <Groups>
-      <Group guid="guidGoToBrowserCmdSet" id="editorRootContextMenu" priority="0x0600">
+      <Group guid="guidGoToBrowserCmdSet" id="solutionContextMenuGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_SOLNNODE" />
+      </Group>
+      
+      <Group guid="guidGoToBrowserCmdSet" id="editorRootContextMenu" priority="0x0610">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_CODEWIN" />
       </Group>
 
-      <Group guid="guidGoToBrowserCmdSet" id="editorRootContextMenu" priority="0x0601">
+      <Group guid="guidGoToBrowserCmdSet" id="editorRootContextMenu" priority="0x0610">
         <Parent guid="guidXamlEditorCmdSet" id="contextMenu" />
       </Group>
 
-      <Group guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" priority="0x0603">
+      <Group guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" priority="0x0611">
         <Parent guid="guidGoToBrowserCmdSet" id="editorContextMenu" />
-      </Group>
-
-      <Group guid="guidGoToBrowserCmdSet" id="solutionContextMenuGroup" priority="0x0602">
-        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_SOLNNODE" />
       </Group>
     </Groups>
 
@@ -80,7 +80,7 @@
 
       <Button guid="guidGoToBrowserCmdSet" id="goToBrowserCommand" priority="0x0100" type="Button">
         <Parent guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" />
-        <Icon guid="commandImages" id="browser" />
+        <Icon guid="guidImages" id="browser" />
         <CommandFlag>DefaultInvisible</CommandFlag>
         <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>
@@ -108,7 +108,7 @@
             bitmap strip containing the bitmaps and then there are the numeric ids of the elements used
             inside a button definition. An important aspect of this declaration is that the element id
             must be the actual index (1-based) of the bitmap inside the bitmap strip. -->
-      <Bitmap guid="commandImages" href="Resources\GoToBrowserCommand.png" usedList="browser" />
+      <Bitmap guid="guidImages" href="Resources\GoToBrowserCommand.png" usedList="browser" />
     </Bitmaps>
 
   </Commands>
@@ -124,11 +124,12 @@
     <!-- This is the guid used to group the menu commands together -->
     <GuidSymbol name="guidGoToBrowserCmdSet" value="{55ba95ee-03a2-4f1f-8107-8148a9dfea43}">
       <!-- MenuGroup -->
-      <IDSymbol name="editorContextMenuGroup" value="0x1020" />
-      <IDSymbol name="solutionContextMenuGroup" value="0x1022" />
+      <IDSymbol name="solutionContextMenuGroup" value="0x1010" />
 
-      <IDSymbol name="editorContextMenu" value="0x1023" />
-      <IDSymbol name="editorRootContextMenu" value="0x1024" />
+      <IDSymbol name="editorRootContextMenu" value="0x1020" />
+      <IDSymbol name="editorContextMenuGroup" value="0x1021" />
+      <IDSymbol name="editorContextMenu" value="0x1022" />
+      
       <!-- Command -->
       <IDSymbol name="goToBrowserCommand" value="0x0100" />
       <IDSymbol name="configureCommand" value="0x0101" />
@@ -138,7 +139,7 @@
       <IDSymbol name="contextMenu" value="0x0103" />
     </GuidSymbol>
 
-    <GuidSymbol name="commandImages" value="{AA27C05A-2E1A-4AFC-B948-38210F0B2321}">
+    <GuidSymbol name="guidImages" value="{AA27C05A-2E1A-4AFC-B948-38210F0B2321}">
       <IDSymbol name="browser" value="1" />
     </GuidSymbol>
   </Symbols>
