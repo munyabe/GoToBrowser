@@ -135,17 +135,21 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ids\Guids.cs" />
+    <Compile Include="Guids.cs">
+      <DependentUpon>GoToBrowser.vsct</DependentUpon>
+    </Compile>
     <Compile Include="Options\GeneralConfig.cs" />
     <Compile Include="Options\ConfigWindow.xaml.cs">
       <DependentUpon>ConfigWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PkgCmdID.cs">
+      <DependentUpon>GoToBrowser.vsct</DependentUpon>
     </Compile>
     <Compile Include="Utils\Guard.cs" />
     <Compile Include="Utils\IServiceProviderExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GoToBrowserPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Ids\PkgCmdID.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

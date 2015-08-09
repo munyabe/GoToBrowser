@@ -5,7 +5,6 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using EnvDTE;
-using GoToBrowser.Ids;
 using GoToBrowser.Options;
 using GoToBrowser.Properties;
 using GoToBrowser.Utils;
