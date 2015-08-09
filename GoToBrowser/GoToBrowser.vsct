@@ -89,17 +89,6 @@
         </Strings>
       </Button>
 
-      <Button guid="guidGoToBrowserCmdSet" id="goToBrowserCommand" priority="0x0100" type="Button">
-        <Parent guid="guidGoToBrowserCmdSet" id="xamlEditorContextMenuGroup" />
-        <Icon guid="commandImages" id="browser" />
-        <CommandFlag>DefaultInvisible</CommandFlag>
-        <CommandFlag>DynamicVisibility</CommandFlag>
-        <Strings>
-          <CommandName>goToBrowserCommand</CommandName>
-          <ButtonText>Go to Browser</ButtonText>
-        </Strings>
-      </Button>
-
       <Button guid="guidGoToBrowserCmdSet" id="configureCommand" priority="0x0101" type="Button">
         <Parent guid="guidGoToBrowserCmdSet" id="solutionContextMenuGroup" />
         <Icon guid="guidOfficeIcon" id="msotcidNoIcon" />
@@ -136,7 +125,6 @@
     <GuidSymbol name="guidGoToBrowserCmdSet" value="{55ba95ee-03a2-4f1f-8107-8148a9dfea43}">
       <!-- MenuGroup -->
       <IDSymbol name="editorContextMenuGroup" value="0x1020" />
-      <IDSymbol name="xamlEditorContextMenuGroup" value="0x1021" />
       <IDSymbol name="solutionContextMenuGroup" value="0x1022" />
 
       <IDSymbol name="editorContextMenu" value="0x1023" />
