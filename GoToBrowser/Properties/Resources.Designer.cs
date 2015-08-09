@@ -70,15 +70,6 @@ namespace GoToBrowser.Properties {
         }
         
         /// <summary>
-        ///   Go to Browser... に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string ConfigureCommand {
-            get {
-                return ResourceManager.GetString("ConfigureCommand", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   {0} - Go to Browser に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ConfigWindowTitle {

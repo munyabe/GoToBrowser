@@ -120,9 +120,6 @@
   <data name="CommandIsNotExecutable" xml:space="preserve">
     <value>"Go to Browser" command is not executable.</value>
   </data>
-  <data name="ConfigureCommand" xml:space="preserve">
-    <value>Go to Browser...</value>
-  </data>
   <data name="ConfigWindowTitle" xml:space="preserve">
     <value>{0} - Go to Browser</value>
   </data>

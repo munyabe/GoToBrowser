@@ -61,7 +61,6 @@ namespace GoToBrowser
 
             var settingCommandID = new CommandID(GuidList.guidGoToBrowserCmdSet, (int)PkgCmdIDList.configureCommand);
             var configureCommand = new OleMenuCommand(ConfigureCallback, settingCommandID);
-            configureCommand.Text = Resources.ConfigureCommand;
             commandService.AddCommand(configureCommand);
 
             var solution = this.GetService<SVsSolution, IVsSolution>();
