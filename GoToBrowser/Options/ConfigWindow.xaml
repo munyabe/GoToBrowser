@@ -50,7 +50,7 @@
             <TextBlock Text="Defines the URL format of destination file." />
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text=" ex) " VerticalAlignment="Center"/>
-                <TextBox Text="https://github.com/{User Name}/{SN}/blob/master/{FP}" Style="{StaticResource ReadOnlyTextBox}" VerticalAlignment="Center"/>
+                <TextBox Text="https://github.com/{User Name}/{SN}/blob/master/{FP}#L{LN}" Style="{StaticResource ReadOnlyTextBox}" VerticalAlignment="Center"/>
             </StackPanel>
             <TextBlock Text="The following special keywords 'Key' or 'Abbr.' will be replaced with current values." />
 
