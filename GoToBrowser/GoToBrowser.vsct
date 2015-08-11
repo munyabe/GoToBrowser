@@ -78,18 +78,88 @@
               <CommandFlag>DynamicVisibility</CommandFlag>
           If you do not want an image next to your command, remove the Icon node or set it to <Icon guid="guidOfficeIcon" id="msotcidNoIcon" /> -->
 
-      <Button guid="guidGoToBrowserCmdSet" id="goToBrowserCommand" priority="0x0100" type="Button">
+      <Button guid="guidGoToBrowserCmdSet" id="goToBrowserCommand1" priority="0x0101" type="Button">
         <Parent guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" />
         <Icon guid="guidImages" id="browser" />
         <CommandFlag>DefaultInvisible</CommandFlag>
         <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>
-          <CommandName>goToBrowserCommand</CommandName>
-          <ButtonText>Go to Browser</ButtonText>
+          <CommandName>goToBrowserCommand1</CommandName>
+          <ButtonText>Go to Browser 1</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidGoToBrowserCmdSet" id="goToBrowserCommand2" priority="0x0102" type="Button">
+        <Parent guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" />
+        <Icon guid="guidImages" id="browser" />
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <CommandName>goToBrowserCommand2</CommandName>
+          <ButtonText>Go to Browser 2</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidGoToBrowserCmdSet" id="goToBrowserCommand3" priority="0x0103" type="Button">
+        <Parent guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" />
+        <Icon guid="guidImages" id="browser" />
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <CommandName>goToBrowserCommand3</CommandName>
+          <ButtonText>Go to Browser 3</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidGoToBrowserCmdSet" id="goToBrowserCommand4" priority="0x0104" type="Button">
+        <Parent guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" />
+        <Icon guid="guidImages" id="browser" />
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <CommandName>goToBrowserCommand4</CommandName>
+          <ButtonText>Go to Browser 4</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidGoToBrowserCmdSet" id="goToBrowserCommand5" priority="0x0105" type="Button">
+        <Parent guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" />
+        <Icon guid="guidImages" id="browser" />
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <CommandName>goToBrowserCommand5</CommandName>
+          <ButtonText>Go to Browser 5</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidGoToBrowserCmdSet" id="goToBrowserCommand6" priority="0x0106" type="Button">
+        <Parent guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" />
+        <Icon guid="guidImages" id="browser" />
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <CommandName>goToBrowserCommand6</CommandName>
+          <ButtonText>Go to Browser 6</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidGoToBrowserCmdSet" id="goToBrowserCommand7" priority="0x0107" type="Button">
+        <Parent guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" />
+        <Icon guid="guidImages" id="browser" />
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <CommandName>goToBrowserCommand7</CommandName>
+          <ButtonText>Go to Browser 7</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidGoToBrowserCmdSet" id="goToBrowserCommand8" priority="0x0108" type="Button">
+        <Parent guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" />
+        <Icon guid="guidImages" id="browser" />
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <CommandName>goToBrowserCommand8</CommandName>
+          <ButtonText>Go to Browser 8</ButtonText>
         </Strings>
       </Button>
 
-      <Button guid="guidGoToBrowserCmdSet" id="configureCommand" priority="0x0101" type="Button">
+      <Button guid="guidGoToBrowserCmdSet" id="configureCommand" priority="0x0100" type="Button">
         <Parent guid="guidGoToBrowserCmdSet" id="solutionContextMenuGroup" />
         <Icon guid="guidOfficeIcon" id="msotcidNoIcon" />
         <CommandFlag>TextChanges</CommandFlag>
@@ -114,7 +184,7 @@
   </Commands>
 
   <KeyBindings>
-    <KeyBinding guid="guidGoToBrowserCmdSet" id="goToBrowserCommand" editor="guidVSStd97" key1="B" mod1="Control" key2="R" mod2="Control" />
+    <KeyBinding guid="guidGoToBrowserCmdSet" id="goToBrowserCommand1" editor="guidVSStd97" key1="B" mod1="Control" key2="R" mod2="Control" />
   </KeyBindings>
 
   <Symbols>
@@ -131,8 +201,15 @@
       <IDSymbol name="editorContextMenu" value="0x1022" />
       
       <!-- Command -->
-      <IDSymbol name="goToBrowserCommand" value="0x0100" />
-      <IDSymbol name="configureCommand" value="0x0101" />
+      <IDSymbol name="configureCommand" value="0x0100" />
+      <IDSymbol name="goToBrowserCommand1" value="0x0101" />
+      <IDSymbol name="goToBrowserCommand2" value="0x0102" />
+      <IDSymbol name="goToBrowserCommand3" value="0x0103" />
+      <IDSymbol name="goToBrowserCommand4" value="0x0104" />
+      <IDSymbol name="goToBrowserCommand5" value="0x0105" />
+      <IDSymbol name="goToBrowserCommand6" value="0x0106" />
+      <IDSymbol name="goToBrowserCommand7" value="0x0107" />
+      <IDSymbol name="goToBrowserCommand8" value="0x0108" />
     </GuidSymbol>
 
     <GuidSymbol name="guidXamlEditorCmdSet" value="{4C87B692-1202-46AA-B64C-EF01FAEC53DA}">

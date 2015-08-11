@@ -54,7 +54,7 @@ namespace GoToBrowser
             base.Initialize();
 
             var commandService = this.GetService<IMenuCommandService, OleMenuCommandService>();
-            var goToBrowserCommandId = new CommandID(GuidList.guidGoToBrowserCmdSet, (int)PkgCmdIDList.goToBrowserCommand);
+            var goToBrowserCommandId = new CommandID(GuidList.guidGoToBrowserCmdSet, (int)PkgCmdIDList.goToBrowserCommand1);
             _goToBrowserCommand = new MenuCommand(GoToBrowserCallback, goToBrowserCommandId);
             commandService.AddCommand(_goToBrowserCommand);
 
