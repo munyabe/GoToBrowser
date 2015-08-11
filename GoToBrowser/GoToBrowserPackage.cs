@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using EnvDTE;
+using GoToBrowser.Configs;
 using GoToBrowser.Options;
 using GoToBrowser.Properties;
 using GoToBrowser.Utils;
@@ -39,7 +40,12 @@ namespace GoToBrowser
         /// <summary>
         /// <c>Go to Brouser</c>の設定です。
         /// </summary>
-        private GeneralConfig _config = new GeneralConfig();
+        private ConfigContents _config = new ConfigContents();
+
+        /// <summary>
+        /// 開いているソリューション名です。
+        /// </summary>
+        private string _solutionName;
 
         /// <summary>
         /// <c>Go to Brouser</c>を実行するコマンドです。
@@ -121,11 +127,11 @@ namespace GoToBrowser
         /// </summary>
         private void ConfigureCallback(object sender, EventArgs e)
         {
-            var window = new ConfigWindow(_config);
+            var window = new ConfigWindow(_config, _solutionName);
             window.Apply += (applySender, applyArgs) =>
             {
                 var persistence = this.GetService<SVsSolutionPersistence, IVsSolutionPersistence>();
-                persistence.SavePackageUserOpts(this, GeneralConfig.URL_FORMAT_SUO_KEY);
+                persistence.SavePackageUserOpts(this, ConfigContents.CONFIG_SUO_KEY);
 
                 SetCommandVisible();
             };
@@ -150,10 +156,10 @@ namespace GoToBrowser
             };
 
             var filePath = document.FullName.Replace(solutionPath, string.Empty).Replace("\\", "/");
-            addValue(GeneralConfig.FILE_NAME_KEY, Path.GetFileName(filePath));
-            addValue(GeneralConfig.FILE_PATH_KEY, filePath);
-            addValue(GeneralConfig.LINE_NUMBER_KEY, GetCurrentLineNumber(document).ToString());
-            addValue(GeneralConfig.SOLUTION_NAME_KEY, _config.SolutionName);
+            addValue(ConfigContents.FILE_NAME_KEY, Path.GetFileName(filePath));
+            addValue(ConfigContents.FILE_PATH_KEY, filePath);
+            addValue(ConfigContents.LINE_NUMBER_KEY, GetCurrentLineNumber(document).ToString());
+            addValue(ConfigContents.SOLUTION_NAME_KEY, _solutionName);
 
             var resultUri = Uri.EscapeUriString(StringUtil.Format(_config.UrlFormat, values));
             dte.ExecuteCommand("navigate", string.Format("{0} /ext", resultUri));

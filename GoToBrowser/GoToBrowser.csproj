@@ -138,7 +138,7 @@
     <Compile Include="Guids.cs">
       <DependentUpon>GoToBrowser.vsct</DependentUpon>
     </Compile>
-    <Compile Include="Options\GeneralConfig.cs" />
+    <Compile Include="Configs\ConfigContents.cs" />
     <Compile Include="Options\ConfigWindow.xaml.cs">
       <DependentUpon>ConfigWindow.xaml</DependentUpon>
     </Compile>

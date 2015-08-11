@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using EnvDTE;
-using GoToBrowser.Options;
+using GoToBrowser.Configs;
 using GoToBrowser.Utils;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell.Interop;
@@ -30,10 +30,10 @@ namespace GoToBrowser
         public int OnAfterOpenSolution(object pUnkReserved, int fNewSolution)
         {
             var dte = this.GetService<DTE>();
-            _config.SolutionName = Path.GetFileNameWithoutExtension(dte.Solution.FullName);
+            _solutionName = Path.GetFileNameWithoutExtension(dte.Solution.FullName);
 
             var persistence = this.GetService<SVsSolutionPersistence, IVsSolutionPersistence>();
-            persistence.LoadPackageUserOpts(this, GeneralConfig.URL_FORMAT_SUO_KEY);
+            persistence.LoadPackageUserOpts(this, ConfigContents.CONFIG_SUO_KEY);
 
             SetCommandVisible();
 

@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using GoToBrowser.Configs;
 using GoToBrowser.Utils;
 
 namespace GoToBrowser.Options
@@ -14,7 +15,7 @@ namespace GoToBrowser.Options
         /// <summary>
         /// 設定を保持するインスタンスです。
         /// </summary>
-        private GeneralConfig _config;
+        private ConfigContents _config;
 
         /// <summary>
         /// 設定を適用するときに発生します。
@@ -25,20 +26,21 @@ namespace GoToBrowser.Options
         /// インスタンスを初期化します。
         /// </summary>
         /// <param name="config">設定を保持するインスタンス</param>
-        public ConfigWindow(GeneralConfig config)
+        /// <param name="solutionName">ソリューション名</param>
+        public ConfigWindow(ConfigContents config, string solutionName)
         {
             InitializeComponent();
 
             _config = config;
             urlFormat.Text = _config.UrlFormat;
 
-            Title = string.Format(Properties.Resources.ConfigWindowTitle, config.SolutionName);
+            Title = string.Format(Properties.Resources.ConfigWindowTitle, solutionName);
             DataContext = new UrlKeyFormat[]
             {
-                new UrlKeyFormat(GeneralConfig.FILE_NAME_KEY, Properties.Resources.FileNameKeyDescription),
-                new UrlKeyFormat(GeneralConfig.FILE_PATH_KEY, Properties.Resources.FilePathKeyDescription),
-                new UrlKeyFormat(GeneralConfig.LINE_NUMBER_KEY, Properties.Resources.LineNumberKeyDescription),
-                new UrlKeyFormat(GeneralConfig.SOLUTION_NAME_KEY, Properties.Resources.SolutionNameKeyDescription)
+                new UrlKeyFormat(ConfigContents.FILE_NAME_KEY, Properties.Resources.FileNameKeyDescription),
+                new UrlKeyFormat(ConfigContents.FILE_PATH_KEY, Properties.Resources.FilePathKeyDescription),
+                new UrlKeyFormat(ConfigContents.LINE_NUMBER_KEY, Properties.Resources.LineNumberKeyDescription),
+                new UrlKeyFormat(ConfigContents.SOLUTION_NAME_KEY, Properties.Resources.SolutionNameKeyDescription)
             };
 
             Loaded += (sender, e) => MoveFocus(new TraversalRequest(FocusNavigationDirection.First));

@@ -1,14 +1,14 @@
-﻿namespace GoToBrowser.Options
+﻿namespace GoToBrowser.Configs
 {
     /// <summary>
-    /// 設定情報を保持するクラスです。
+    /// 設定内容を保持するクラスです。
     /// </summary>
-    public class GeneralConfig
+    public class ConfigContents
     {
         /// <summary>
-        /// URLフォーマットを .suo ファイルに保存する際のキーです。
+        /// 設定内容を .suo ファイルに保存する際のキーです。
         /// </summary>
-        public const string URL_FORMAT_SUO_KEY = "GoToBrouser.UrlFormat";
+        public const string CONFIG_SUO_KEY = "GoToBrouser.UrlFormat";
 
         /// <summary>
         /// URLフォーマットでファイル名に置換されるキーです。
@@ -34,10 +34,5 @@
         /// URLフォーマットを取得または設定します。
         /// </summary>
         public string UrlFormat { get; set; }
-
-        /// <summary>
-        /// 現在のソリューション名を取得または設定します。
-        /// </summary>
-        public string SolutionName { get; set; }
     }
 }
