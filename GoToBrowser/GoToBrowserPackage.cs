@@ -44,11 +44,6 @@ namespace GoToBrowser
         private ConfigContents _config = new ConfigContents();
 
         /// <summary>
-        /// 開いているソリューション名です。
-        /// </summary>
-        private string _solutionName;
-
-        /// <summary>
         /// パッケージを初期化します。
         /// </summary>
         protected override void Initialize()
@@ -119,7 +114,7 @@ namespace GoToBrowser
         /// </summary>
         private void ConfigureCallback(object sender, EventArgs e)
         {
-            var window = new ConfigWindow(_config, _solutionName);
+            var window = new ConfigWindow(_config);
             window.Apply += (applySender, applyArgs) =>
             {
                 var persistence = this.GetService<SVsSolutionPersistence, IVsSolutionPersistence>();
@@ -137,7 +132,9 @@ namespace GoToBrowser
         private void ExecuteGoToBrowser(CommandMenuItem item)
         {
             var dte = this.GetService<DTE>();
-            var solutionPath = Path.GetDirectoryName(dte.Solution.FullName);
+
+            var solutionFullName = dte.Solution.FullName;
+            var solutionPath = Path.GetDirectoryName(solutionFullName);
             var document = dte.ActiveDocument;
 
             var values = new Dictionary<string, string>();
@@ -151,7 +148,7 @@ namespace GoToBrowser
             addValue(ConfigContents.FILE_NAME_KEY, Path.GetFileName(filePath));
             addValue(ConfigContents.FILE_PATH_KEY, filePath);
             addValue(ConfigContents.LINE_NUMBER_KEY, GetCurrentLineNumber(document).ToString());
-            addValue(ConfigContents.SOLUTION_NAME_KEY, _solutionName);
+            addValue(ConfigContents.SOLUTION_NAME_KEY, Path.GetFileNameWithoutExtension(solutionFullName));
 
             var resultUri = Uri.EscapeUriString(StringUtil.Format(item.UrlFormat, values));
 

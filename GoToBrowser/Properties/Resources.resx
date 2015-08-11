@@ -120,9 +120,6 @@
   <data name="CommandIsNotExecutable" xml:space="preserve">
     <value>"Go to Browser" command is not executable.</value>
   </data>
-  <data name="ConfigWindowTitle" xml:space="preserve">
-    <value>{0} - Go to Browser</value>
-  </data>
   <data name="FileNameKeyDescription" xml:space="preserve">
     <value>Currnt file name.</value>
   </data>
@@ -131,6 +128,9 @@
   </data>
   <data name="LineNumberKeyDescription" xml:space="preserve">
     <value>Current line number.</value>
+  </data>
+  <data name="PluginName" xml:space="preserve">
+    <value>Go to Browser</value>
   </data>
   <data name="SolutionNameKeyDescription" xml:space="preserve">
     <value>Current solution name.</value>

@@ -29,9 +29,6 @@ namespace GoToBrowser
 
         public int OnAfterOpenSolution(object pUnkReserved, int fNewSolution)
         {
-            var dte = this.GetService<DTE>();
-            _solutionName = Path.GetFileNameWithoutExtension(dte.Solution.FullName);
-
             var persistence = this.GetService<SVsSolutionPersistence, IVsSolutionPersistence>();
             persistence.LoadPackageUserOpts(this, ConfigContents.CONFIG_SUO_KEY);
 

@@ -70,15 +70,6 @@ namespace GoToBrowser.Properties {
         }
         
         /// <summary>
-        ///   {0} - Go to Browser に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string ConfigWindowTitle {
-            get {
-                return ResourceManager.GetString("ConfigWindowTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Currnt file name. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string FileNameKeyDescription {
@@ -102,6 +93,15 @@ namespace GoToBrowser.Properties {
         internal static string LineNumberKeyDescription {
             get {
                 return ResourceManager.GetString("LineNumberKeyDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Go to Browser に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string PluginName {
+            get {
+                return ResourceManager.GetString("PluginName", resourceCulture);
             }
         }
         

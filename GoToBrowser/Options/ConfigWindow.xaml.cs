@@ -26,15 +26,14 @@ namespace GoToBrowser.Options
         /// インスタンスを初期化します。
         /// </summary>
         /// <param name="config">設定を保持するインスタンス</param>
-        /// <param name="solutionName">ソリューション名</param>
-        public ConfigWindow(ConfigContents config, string solutionName)
+        public ConfigWindow(ConfigContents config)
         {
             InitializeComponent();
 
             _config = config;
             urlFormat.Text = _config.UrlFormat;
 
-            Title = string.Format(Properties.Resources.ConfigWindowTitle, solutionName);
+            Title = Properties.Resources.PluginName;
             DataContext = new UrlKeyFormat[]
             {
                 new UrlKeyFormat(ConfigContents.FILE_NAME_KEY, Properties.Resources.FileNameKeyDescription),
