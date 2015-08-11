@@ -4,6 +4,7 @@ using System.ComponentModel.Design;
 using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Windows;
 using EnvDTE;
 using GoToBrowser.Configs;
 using GoToBrowser.Options;
@@ -48,11 +49,6 @@ namespace GoToBrowser
         private string _solutionName;
 
         /// <summary>
-        /// <c>Go to Brouser</c>を実行するコマンドです。
-        /// </summary>
-        private MenuCommand _goToBrowserCommand;
-
-        /// <summary>
         /// パッケージを初期化します。
         /// </summary>
         protected override void Initialize()
@@ -60,13 +56,8 @@ namespace GoToBrowser
             base.Initialize();
 
             var commandService = this.GetService<IMenuCommandService, OleMenuCommandService>();
-            var goToBrowserCommandId = new CommandID(GuidList.guidGoToBrowserCmdSet, (int)PkgCmdIDList.goToBrowserCommand1);
-            _goToBrowserCommand = new MenuCommand(GoToBrowserCallback, goToBrowserCommandId);
-            commandService.AddCommand(_goToBrowserCommand);
-
-            var settingCommandID = new CommandID(GuidList.guidGoToBrowserCmdSet, (int)PkgCmdIDList.configureCommand);
-            var configureCommand = new OleMenuCommand(ConfigureCallback, settingCommandID);
-            commandService.AddCommand(configureCommand);
+            var commandID = new CommandID(GuidList.guidGoToBrowserCmdSet, (int)PkgCmdIDList.configureCommand);
+            commandService.AddCommand(new OleMenuCommand(ConfigureCallback, commandID));
 
             var solution = this.GetService<SVsSolution, IVsSolution>();
             uint solutionEventCoockie;
@@ -101,7 +92,7 @@ namespace GoToBrowser
         /// <summary>
         /// ドキュメントのカーソル位置の行数を取得します。
         /// </summary>
-        private int GetCurrentLineNumber(Document document)
+        private static int GetCurrentLineNumber(Document document)
         {
             var textDocument = document.Object("TextDocument") as TextDocument;
             return textDocument != null ? textDocument.Selection.ActivePoint.Line : 0;
@@ -114,7 +105,8 @@ namespace GoToBrowser
         {
             try
             {
-                ExecuteGoToBrowser();
+                var command = (MenuCommand)sender;
+                ExecuteGoToBrowser(_config.MenuItems[PkgCmdIDList.GetCommandIndex(command.CommandID)]);
             }
             catch (Exception ex)
             {
@@ -142,7 +134,7 @@ namespace GoToBrowser
         /// <summary>
         /// <c>Go to Browser</c>コマンドを実行します。
         /// </summary>
-        private void ExecuteGoToBrowser()
+        private void ExecuteGoToBrowser(CommandMenuItem item)
         {
             var dte = this.GetService<DTE>();
             var solutionPath = Path.GetDirectoryName(dte.Solution.FullName);
@@ -161,8 +153,23 @@ namespace GoToBrowser
             addValue(ConfigContents.LINE_NUMBER_KEY, GetCurrentLineNumber(document).ToString());
             addValue(ConfigContents.SOLUTION_NAME_KEY, _solutionName);
 
-            var resultUri = Uri.EscapeUriString(StringUtil.Format(_config.UrlFormat, values));
-            dte.ExecuteCommand("navigate", string.Format("{0} /ext", resultUri));
+            var resultUri = Uri.EscapeUriString(StringUtil.Format(item.UrlFormat, values));
+
+            if (item.Mode == ExecuteMode.ShowBrowser)
+            {
+                dte.ExecuteCommand("navigate", string.Format("{0} /ext", resultUri));
+            }
+            else if (item.Mode == ExecuteMode.Copy)
+            {
+                try
+                {
+                    Clipboard.SetText(resultUri, TextDataFormat.Text);
+                }
+                catch (COMException)
+                {
+                    // MEMO : 他のアプリケーションがクリップボードを監視している場合に発生する可能性がある。
+                }
+            }
         }
 
         /// <summary>
@@ -170,7 +177,34 @@ namespace GoToBrowser
         /// </summary>
         private void SetCommandVisible()
         {
-            _goToBrowserCommand.Visible = string.IsNullOrWhiteSpace(_config.UrlFormat) == false;
+            var commandService = this.GetService<IMenuCommandService, OleMenuCommandService>();
+            var menues = _config.MenuItems;
+
+            for (int i = 0; i < menues.Count; i++)
+            {
+                var commandId = PkgCmdIDList.GetCommandId(i);
+                var command = commandService.FindCommand(commandId) as OleMenuCommand;
+                if (command != null)
+                {
+                    command.Visible = true;
+                }
+                else
+                {
+                    command = new OleMenuCommand(GoToBrowserCallback, commandId);
+                    commandService.AddCommand(command);
+                }
+
+                command.Text = menues[i].Name;
+            }
+
+            for (int i = menues.Count; i < PkgCmdIDList.MAX_COMMAND_COUNT; i++)
+            {
+                var command = commandService.FindCommand(PkgCmdIDList.GetCommandId(i));
+                if (command != null)
+                {
+                    command.Visible = false;
+                }
+            }
         }
 
         /// <summary>

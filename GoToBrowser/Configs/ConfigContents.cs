@@ -1,4 +1,6 @@
-﻿namespace GoToBrowser.Configs
+﻿using System.Collections.Generic;
+
+namespace GoToBrowser.Configs
 {
     /// <summary>
     /// 設定内容を保持するクラスです。
@@ -29,6 +31,11 @@
         /// URLフォーマットでソリューション名に置換されるキーです。
         /// </summary>
         public const string SOLUTION_NAME_KEY = "SolutionName";
+
+        /// <summary>
+        /// メニューの一覧を取得または設定します。
+        /// </summary>
+        public IList<CommandMenuItem> MenuItems { get; set; }
 
         /// <summary>
         /// URLフォーマットを取得または設定します。
