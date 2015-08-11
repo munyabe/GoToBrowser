@@ -80,7 +80,6 @@
 
       <Button guid="guidGoToBrowserCmdSet" id="goToBrowserCommand1" priority="0x0101" type="Button">
         <Parent guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" />
-        <Icon guid="guidImages" id="browser" />
         <CommandFlag>DefaultInvisible</CommandFlag>
         <CommandFlag>DynamicVisibility</CommandFlag>
         <CommandFlag>TextChanges</CommandFlag>
@@ -91,7 +90,6 @@
       </Button>
       <Button guid="guidGoToBrowserCmdSet" id="goToBrowserCommand2" priority="0x0102" type="Button">
         <Parent guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" />
-        <Icon guid="guidImages" id="browser" />
         <CommandFlag>DefaultInvisible</CommandFlag>
         <CommandFlag>DynamicVisibility</CommandFlag>
         <CommandFlag>TextChanges</CommandFlag>
@@ -102,7 +100,6 @@
       </Button>
       <Button guid="guidGoToBrowserCmdSet" id="goToBrowserCommand3" priority="0x0103" type="Button">
         <Parent guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" />
-        <Icon guid="guidImages" id="browser" />
         <CommandFlag>DefaultInvisible</CommandFlag>
         <CommandFlag>DynamicVisibility</CommandFlag>
         <CommandFlag>TextChanges</CommandFlag>
@@ -113,7 +110,6 @@
       </Button>
       <Button guid="guidGoToBrowserCmdSet" id="goToBrowserCommand4" priority="0x0104" type="Button">
         <Parent guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" />
-        <Icon guid="guidImages" id="browser" />
         <CommandFlag>DefaultInvisible</CommandFlag>
         <CommandFlag>DynamicVisibility</CommandFlag>
         <CommandFlag>TextChanges</CommandFlag>
@@ -124,7 +120,6 @@
       </Button>
       <Button guid="guidGoToBrowserCmdSet" id="goToBrowserCommand5" priority="0x0105" type="Button">
         <Parent guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" />
-        <Icon guid="guidImages" id="browser" />
         <CommandFlag>DefaultInvisible</CommandFlag>
         <CommandFlag>DynamicVisibility</CommandFlag>
         <CommandFlag>TextChanges</CommandFlag>
@@ -135,7 +130,6 @@
       </Button>
       <Button guid="guidGoToBrowserCmdSet" id="goToBrowserCommand6" priority="0x0106" type="Button">
         <Parent guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" />
-        <Icon guid="guidImages" id="browser" />
         <CommandFlag>DefaultInvisible</CommandFlag>
         <CommandFlag>DynamicVisibility</CommandFlag>
         <CommandFlag>TextChanges</CommandFlag>
@@ -146,7 +140,6 @@
       </Button>
       <Button guid="guidGoToBrowserCmdSet" id="goToBrowserCommand7" priority="0x0107" type="Button">
         <Parent guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" />
-        <Icon guid="guidImages" id="browser" />
         <CommandFlag>DefaultInvisible</CommandFlag>
         <CommandFlag>DynamicVisibility</CommandFlag>
         <CommandFlag>TextChanges</CommandFlag>
@@ -157,7 +150,6 @@
       </Button>
       <Button guid="guidGoToBrowserCmdSet" id="goToBrowserCommand8" priority="0x0108" type="Button">
         <Parent guid="guidGoToBrowserCmdSet" id="editorContextMenuGroup" />
-        <Icon guid="guidImages" id="browser" />
         <CommandFlag>DefaultInvisible</CommandFlag>
         <CommandFlag>DynamicVisibility</CommandFlag>
         <CommandFlag>TextChanges</CommandFlag>
@@ -169,7 +161,7 @@
 
       <Button guid="guidGoToBrowserCmdSet" id="configureCommand" priority="0x0100" type="Button">
         <Parent guid="guidGoToBrowserCmdSet" id="solutionContextMenuGroup" />
-        <Icon guid="guidOfficeIcon" id="msotcidNoIcon" />
+        <Icon guid="guidImages" id="browser" />
         <CommandFlag>TextChanges</CommandFlag>
         <Strings>
           <CommandName>configureCommand</CommandName>
