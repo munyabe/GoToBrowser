@@ -94,6 +94,26 @@ namespace GoToBrowser
         }
 
         /// <summary>
+        /// 現在開いているソリューションのフルパスを取得します。
+        /// プロジェクトファイルを直接開いている場合は、プロジェクトファイルのパスを取得します。
+        /// </summary>
+        private static string GetSolutionFullName(Solution solution)
+        {
+            var result = solution.FullName;
+            if (string.IsNullOrEmpty(result))
+            {
+                foreach (var project in solution.Projects)
+                {
+                    dynamic comProject = project;
+                    result = comProject.FullName;
+                    break;
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// <c>Go to Browser</c>コマンドを実行したときの処理です。
         /// </summary>
         private void GoToBrowserCallback(object sender, EventArgs e)
@@ -132,8 +152,7 @@ namespace GoToBrowser
         private void ExecuteGoToBrowser(CommandMenuItem item)
         {
             var dte = this.GetService<DTE>();
-
-            var solutionFullName = dte.Solution.FullName;
+            var solutionFullName = GetSolutionFullName(dte.Solution);
             var solutionPath = Path.GetDirectoryName(solutionFullName);
             var document = dte.ActiveDocument;
 
