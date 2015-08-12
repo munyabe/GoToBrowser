@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Globalization;
 using System.IO;
@@ -152,24 +151,10 @@ namespace GoToBrowser
         private void ExecuteGoToBrowser(CommandMenuItem item)
         {
             var dte = this.GetService<DTE>();
-            var solutionFullName = GetSolutionFullName(dte.Solution);
-            var solutionPath = Path.GetDirectoryName(solutionFullName);
             var document = dte.ActiveDocument;
 
-            var values = new Dictionary<string, string>();
-            Action<string, string> addValue = (keyName, value) =>
-            {
-                values[keyName] = value;
-                values[StringUtil.GetUpperCases(keyName)] = value;
-            };
-
-            var filePath = document.FullName.Replace(solutionPath, string.Empty).Replace("\\", "/");
-            addValue(ConfigContents.FILE_NAME_KEY, Path.GetFileName(filePath));
-            addValue(ConfigContents.FILE_PATH_KEY, filePath);
-            addValue(ConfigContents.LINE_NUMBER_KEY, GetCurrentLineNumber(document).ToString());
-            addValue(ConfigContents.SOLUTION_NAME_KEY, Path.GetFileNameWithoutExtension(solutionFullName));
-
-            var resultUri = Uri.EscapeUriString(StringUtil.Format(item.UrlFormat, values));
+            var macros = ConfigContents.CreateMacros(GetSolutionFullName(dte.Solution), document.FullName, GetCurrentLineNumber(document));
+            var resultUri = Uri.EscapeUriString(StringUtil.Format(item.UrlFormat, macros));
 
             if (item.Mode == ExecuteMode.ShowBrowser)
             {
