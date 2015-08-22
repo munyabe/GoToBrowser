@@ -13,7 +13,7 @@
     <AssemblyName>GoToBrowser</AssemblyName>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -35,6 +35,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,6 +45,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -53,6 +55,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -69,6 +72,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
@@ -141,12 +145,10 @@
       <DependentUpon>GoToBrowser.vsct</DependentUpon>
     </Compile>
     <Compile Include="Configs\ConfigContents.cs" />
-    <Compile Include="Options\ConfigWindow.xaml.cs">
-      <DependentUpon>ConfigWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="PkgCmdID.cs">
       <DependentUpon>GoToBrowser.vsct</DependentUpon>
     </Compile>
+    <Compile Include="Utils\EnumerableExtensions.cs" />
     <Compile Include="Utils\Guard.cs" />
     <Compile Include="Utils\IServiceProviderExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -158,6 +160,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Utils\StringUtil.cs" />
+    <Compile Include="Views\EnumToBooleanConverter.cs" />
+    <Compile Include="Views\MenuEditorView.xaml.cs">
+      <DependentUpon>MenuEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MenuListView.xaml.cs">
+      <DependentUpon>MenuListView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -203,11 +212,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Options\ConfigWindow.xaml">
+    <Page Include="Views\MenuEditorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MenuListView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -233,6 +244,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>
   </PropertyGroup>

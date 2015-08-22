@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using EnvDTE;
 using GoToBrowser.Configs;
-using GoToBrowser.Options;
 using GoToBrowser.Properties;
 using GoToBrowser.Utils;
+using GoToBrowser.Views;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
@@ -133,9 +133,11 @@ namespace GoToBrowser
         /// </summary>
         private void ConfigureCallback(object sender, EventArgs e)
         {
-            var window = new ConfigWindow(_config);
-            window.Apply += (applySender, applyArgs) =>
+            var window = new MenuListView(_config.MenuItems);
+            window.Applied += (applySender, applyArgs) =>
             {
+                _config.MenuItems = applyArgs;
+
                 var persistence = this.GetService<SVsSolutionPersistence, IVsSolutionPersistence>();
                 persistence.SavePackageUserOpts(this, ConfigContents.CONFIG_SUO_KEY);
 
