@@ -41,9 +41,12 @@ namespace GoToBrowser.Configs
         public IList<CommandMenuItem> MenuItems { get; set; }
 
         /// <summary>
-        /// URLフォーマットを取得または設定します。
+        /// インスタンスを初期化します。
         /// </summary>
-        public string UrlFormat { get; set; }
+        public ConfigContents()
+        {
+            MenuItems = new List<CommandMenuItem>();
+        }
 
         /// <summary>
         /// URL フォーマットに適用できるマクロの一覧を作成します。

@@ -59,25 +59,50 @@ namespace GoToBrowser
         }
 
         /// <summary>
-        /// .suo ファイルを読み込む際の処理です。
+        /// .suo ファイルから指定されたキーのデータを読み込みます。
         /// </summary>
-        /// <remarks><c>.suo</c>ファイルに<paramref name="key"/>が存在しない場合は呼び出されません。</remarks>
+        /// <remarks>
+        /// .suo ファイルにキーが存在しない場合は呼び出されません。
+        /// </remarks>
         protected override void OnLoadOptions(string key, Stream stream)
         {
             using (var reader = new BinaryReader(stream))
             {
-                _config.UrlFormat = reader.ReadString();
+                if (reader.PeekChar() < 0)
+                {
+                    return;
+                }
+
+                var first = reader.ReadString();
+                if (0 <= reader.PeekChar())
+                {
+                    _config.MenuItems.Add(new CommandMenuItem(first, reader.ReadString(), (ExecuteMode)reader.ReadByte()));
+                    while (0 <= reader.PeekChar())
+                    {
+                        _config.MenuItems.Add(new CommandMenuItem(reader.ReadString(), reader.ReadString(), (ExecuteMode)reader.ReadByte()));
+                    }
+                }
+                else
+                {
+                    // MEMO : ver 1.2 までのデータフォーマットと互換性を維持するための対応
+                    _config.MenuItems.Add(new CommandMenuItem("Go to Browser", first, ExecuteMode.ShowBrowser));
+                }
             }
         }
 
         /// <summary>
-        /// .suo ファイルを保存する際の処理です。
+        /// 指定されたキーでデータを .suo ファイルに保存します。
         /// </summary>
         protected override void OnSaveOptions(string key, Stream stream)
         {
             using (var writer = new BinaryWriter(stream))
             {
-                writer.Write(_config.UrlFormat);
+                _config.MenuItems.ForEach(menu =>
+                {
+                    writer.Write(menu.Name);
+                    writer.Write(menu.UrlFormat);
+                    writer.Write((byte)menu.Mode);
+                });
             }
 
             base.OnSaveOptions(key, stream);
