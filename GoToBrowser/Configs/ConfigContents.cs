@@ -65,7 +65,7 @@ namespace GoToBrowser.Configs
             };
 
             var solutionDirectory = Path.GetDirectoryName(solutionFullName);
-            var filePath = fileFullName.Replace(solutionDirectory, string.Empty).Replace("\\", "/");
+            var filePath = fileFullName.Remove(0, solutionDirectory.Length).Replace("\\", "/");
             addValue(ConfigContents.FILE_NAME_KEY, Path.GetFileName(filePath));
             addValue(ConfigContents.FILE_PATH_KEY, filePath);
             addValue(ConfigContents.LINE_NUMBER_KEY, lineNumber.ToString());
