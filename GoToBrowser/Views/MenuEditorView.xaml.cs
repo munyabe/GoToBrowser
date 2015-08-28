@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using GoToBrowser.Configs;
+using GoToBrowser.Utils;
 
 namespace GoToBrowser.Views
 {
@@ -52,10 +53,10 @@ namespace GoToBrowser.Views
 
             _macroList.ItemsSource = new UrlKeyFormat[]
             {
-                new UrlKeyFormat(ConfigContents.FILE_NAME_KEY, "hoge"),
-                new UrlKeyFormat(ConfigContents.FILE_PATH_KEY, "fuga"),
-                new UrlKeyFormat(ConfigContents.LINE_NUMBER_KEY, "piyo"),
-                new UrlKeyFormat(ConfigContents.SOLUTION_NAME_KEY, "boke")
+                new UrlKeyFormat(ConfigContents.FILE_NAME_KEY, Properties.Resources.FileNameKeyDescription),
+                new UrlKeyFormat(ConfigContents.FILE_PATH_KEY, Properties.Resources.FilePathKeyDescription),
+                new UrlKeyFormat(ConfigContents.LINE_NUMBER_KEY, Properties.Resources.LineNumberKeyDescription),
+                new UrlKeyFormat(ConfigContents.SOLUTION_NAME_KEY, Properties.Resources.SolutionNameKeyDescription)
             };
 
             DataContext = _menuItem;
@@ -118,7 +119,7 @@ namespace GoToBrowser.Views
             {
                 const string keyFormat = "{{{0}}}";
                 Key = string.Format(keyFormat, key);
-                Abbreviation = string.Format(keyFormat, "A");
+                Abbreviation = string.Format(keyFormat, StringUtil.GetUpperCases(key));
                 Description = description;
             }
         }
