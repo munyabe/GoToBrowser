@@ -51,7 +51,7 @@ namespace GoToBrowser.Configs
         /// <summary>
         /// URL フォーマットに適用できるマクロの一覧を作成します。
         /// </summary>
-        /// <param name="solutionFullName">ソリューションファイルの絶対パス/param>
+        /// <param name="solutionFullName">ソリューションファイルの絶対パス</param>
         /// <param name="fileFullName">現在開いているファイルの絶対パス</param>
         /// <param name="lineNumber">現在のカーソル位置の行数</param>
         /// <returns>マクロの一覧</returns>

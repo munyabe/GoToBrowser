@@ -34,7 +34,7 @@ namespace GoToBrowser
         /// <summary>
         /// Go to Brouser コマンドのインデックスを取得します。
         /// </summary>
-        /// <param name="index">コマンド Id</param>
+        /// <param name="commandID">コマンド Id</param>
         /// <returns>コマンドのインデックス</returns>
         public static int GetCommandIndex(CommandID commandID)
         {
