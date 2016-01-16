@@ -3,7 +3,7 @@
   <Identifier Id="cd8f7ba3-3b25-4272-9b03-be6e009378da">
     <Name>Go to Browser</Name>
     <Author>munyabe</Author>
-    <Version>2.1</Version>
+    <Version>2.2</Version>
     <Description xml:space="preserve">This is a visual studio extension, that goes to a web browser on your repository.</Description>
     <Locale>1033</Locale>
     <MoreInfoUrl>http://visualstudiogallery.msdn.microsoft.com/784dd162-53e2-40ff-a8e6-eb6a4bb9acc8</MoreInfoUrl>
