@@ -181,22 +181,34 @@ namespace GoToBrowser
             var document = dte.ActiveDocument;
 
             var macros = ConfigContents.CreateMacros(GetSolutionFullName(dte.Solution), document.FullName, GetCurrentLineNumber(document));
-            var resultUri = Uri.EscapeUriString(StringUtil.Format(item.UrlFormat, macros));
+            var targetPath = StringUtil.Format(item.UrlFormat, macros);
 
             if (item.Mode == ExecuteMode.ShowBrowser)
             {
-                dte.ExecuteCommand("navigate", string.Format("{0} /ext", resultUri));
+                dte.ExecuteCommand("navigate", string.Format("{0} /ext", Uri.EscapeUriString(targetPath)));
             }
             else if (item.Mode == ExecuteMode.Copy)
             {
-                try
-                {
-                    Clipboard.SetText(resultUri, TextDataFormat.Text);
-                }
-                catch (COMException)
-                {
-                    // MEMO : 他のアプリケーションがクリップボードを監視している場合に発生する可能性がある。
-                }
+                SetClipboard(Uri.EscapeUriString(targetPath));
+            }
+            else if (item.Mode == ExecuteMode.UnescapedCopy)
+            {
+                SetClipboard(targetPath);
+            }
+        }
+
+        /// <summary>
+        /// 指定の文字列をクリップボードにコピーします。
+        /// </summary>
+        private static void SetClipboard(string source)
+        {
+            try
+            {
+                Clipboard.SetText(source, TextDataFormat.Text);
+            }
+            catch (COMException)
+            {
+                // MEMO : 他のアプリケーションがクリップボードを監視している場合に発生する可能性がある。
             }
         }
 
