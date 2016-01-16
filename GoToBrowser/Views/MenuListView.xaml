@@ -29,11 +29,11 @@
             <Setter Property="Margin" Value="5, 2.5" />
         </Style>
 
-        <BitmapImage x:Key="Plus" UriSource="../Resources/plus.png" />
-        <BitmapImage x:Key="Pencil" UriSource="../Resources/pencil.png" />
-        <BitmapImage x:Key="Minus" UriSource="../Resources/minus.png" />
-        <BitmapImage x:Key="ArrowUp" UriSource="../Resources/arrow-090.png" />
-        <BitmapImage x:Key="ArrowDown" UriSource="../Resources/arrow-270.png" />
+        <BitmapImage x:Key="Plus" UriSource="../Resources/Plus.png" />
+        <BitmapImage x:Key="Pencil" UriSource="../Resources/Pencil.png" />
+        <BitmapImage x:Key="Minus" UriSource="../Resources/Minus.png" />
+        <BitmapImage x:Key="ArrowUp" UriSource="../Resources/Arrow_090.png" />
+        <BitmapImage x:Key="ArrowDown" UriSource="../Resources/Arrow_270.png" />
     </Window.Resources>
     <Grid Margin="12">
         <Grid.RowDefinitions>

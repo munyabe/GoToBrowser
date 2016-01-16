@@ -199,19 +199,19 @@
     <Content Include="License.txt">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Resource Include="Resources\arrow-090.png" />
-    <Resource Include="Resources\arrow-270.png" />
-    <Content Include="Resources\GoToBrowserPackage.ico">
+    <Resource Include="Resources\Arrow_090.png" />
+    <Resource Include="Resources\Arrow_270.png" />
+    <Content Include="Resources\GoToBrowser.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Resources\GoToBrowserCommand.png">
+    <Content Include="Resources\GoToBrowser.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Resource Include="Resources\minus.png" />
-    <Resource Include="Resources\pencil.png" />
-    <Resource Include="Resources\plus.png" />
+    <Resource Include="Resources\Minus.png" />
+    <Resource Include="Resources\Pencil.png" />
+    <Resource Include="Resources\Plus.png" />
     <Content Include="Resources\Preview.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
