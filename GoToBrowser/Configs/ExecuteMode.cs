@@ -8,11 +8,11 @@
         /// <summary>
         /// ブラウザで開きます。
         /// </summary>
-        ShowBrowser = 0,
+        ShowBrowser,
 
         /// <summary>
         /// クリップボードにコピーします。
         /// </summary>
-        Copy = 1
+        Copy
     }
 }
