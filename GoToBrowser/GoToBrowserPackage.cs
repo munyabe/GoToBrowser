@@ -2,6 +2,7 @@
 using System.ComponentModel.Design;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows;
 using EnvDTE;
@@ -123,11 +124,10 @@ namespace GoToBrowser
             var result = solution.FullName;
             if (string.IsNullOrEmpty(result))
             {
-                foreach (var project in solution.Projects)
+                var project = solution.Projects.OfType<Project>().FirstOrDefault();
+                if (project != null)
                 {
-                    dynamic comProject = project;
-                    result = comProject.FullName;
-                    break;
+                    result = project.FullName;
                 }
             }
 
