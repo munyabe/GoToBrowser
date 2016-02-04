@@ -1,16 +1,10 @@
 ﻿using System;
 using System.ComponentModel.Design;
-using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Windows;
-using EnvDTE;
 using GoToBrowser.Configs;
-using GoToBrowser.Properties;
 using GoToBrowser.Utils;
 using GoToBrowser.Views;
-using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 
@@ -107,50 +101,6 @@ namespace GoToBrowser
         }
 
         /// <summary>
-        /// ドキュメントのカーソル位置の行数を取得します。
-        /// </summary>
-        private static int GetCurrentLineNumber(Document document)
-        {
-            var textDocument = document.Object("TextDocument") as TextDocument;
-            return textDocument != null ? textDocument.Selection.ActivePoint.Line : 0;
-        }
-
-        /// <summary>
-        /// 現在開いているソリューションのフルパスを取得します。
-        /// プロジェクトファイルを直接開いている場合は、プロジェクトファイルのパスを取得します。
-        /// </summary>
-        private static string GetSolutionFullName(Solution solution)
-        {
-            var result = solution.FullName;
-            if (string.IsNullOrEmpty(result))
-            {
-                var project = solution.Projects.OfType<Project>().FirstOrDefault();
-                if (project != null)
-                {
-                    result = project.FullName;
-                }
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// <c>Go to Browser</c>コマンドを実行したときの処理です。
-        /// </summary>
-        private void GoToBrowserCallback(object sender, EventArgs e)
-        {
-            try
-            {
-                var command = (MenuCommand)sender;
-                ExecuteGoToBrowser(_config.MenuItems[PkgCmdIDList.GetCommandIndex(command.CommandID)]);
-            }
-            catch (Exception ex)
-            {
-                ShowMessageBox(string.Format(CultureInfo.CurrentCulture, "{0}", ex.Message), OLEMSGICON.OLEMSGICON_WARNING);
-            }
-        }
-
-        /// <summary>
         /// <c>Go to Browser</c>の設定コマンドを実行したときの処理です。
         /// </summary>
         private void ConfigureCallback(object sender, EventArgs e)
@@ -170,46 +120,6 @@ namespace GoToBrowser
         }
 
         /// <summary>
-        /// <c>Go to Browser</c>コマンドを実行します。
-        /// </summary>
-        private void ExecuteGoToBrowser(CommandMenuItem item)
-        {
-            var dte = this.GetService<DTE>();
-            var document = dte.ActiveDocument;
-
-            var macros = ConfigContents.CreateMacros(GetSolutionFullName(dte.Solution), document.FullName, GetCurrentLineNumber(document));
-            var targetPath = StringUtil.Format(item.UrlFormat, macros);
-
-            if (item.Mode == ExecuteMode.ShowBrowser)
-            {
-                dte.ExecuteCommand("navigate", string.Format("{0} /ext", Uri.EscapeUriString(targetPath)));
-            }
-            else if (item.Mode == ExecuteMode.Copy)
-            {
-                SetClipboard(Uri.EscapeUriString(targetPath));
-            }
-            else if (item.Mode == ExecuteMode.UnescapedCopy)
-            {
-                SetClipboard(targetPath);
-            }
-        }
-
-        /// <summary>
-        /// 指定の文字列をクリップボードにコピーします。
-        /// </summary>
-        private static void SetClipboard(string source)
-        {
-            try
-            {
-                Clipboard.SetText(source, TextDataFormat.Text);
-            }
-            catch (COMException)
-            {
-                // MEMO : 他のアプリケーションがクリップボードを監視している場合に発生する可能性がある。
-            }
-        }
-
-        /// <summary>
         /// <c>Go to Brouser</c>コマンドの表示状態を設定します。
         /// </summary>
         private void SetCommandVisible()
@@ -219,7 +129,7 @@ namespace GoToBrowser
 
             for (int i = 0; i < menues.Count; i++)
             {
-                var commandId = PkgCmdIDList.GetCommandId(i);
+                var commandId = GoToBrowserCommand.GetCommandId(i);
                 var command = commandService.FindCommand(commandId) as OleMenuCommand;
                 if (command != null)
                 {
@@ -227,45 +137,21 @@ namespace GoToBrowser
                 }
                 else
                 {
-                    command = new OleMenuCommand(GoToBrowserCallback, commandId);
-                    commandService.AddCommand(command);
+                    GoToBrowserCommand.Initialize(this, i, _config);
+                    command = GoToBrowserCommand.Instance.SourceCommand;
                 }
 
                 command.Text = menues[i].Name;
             }
 
-            for (int i = menues.Count; i < PkgCmdIDList.MAX_COMMAND_COUNT; i++)
+            for (int i = menues.Count; i < GoToBrowserCommand.MaxCommandCount; i++)
             {
-                var command = commandService.FindCommand(PkgCmdIDList.GetCommandId(i));
+                var command = commandService.FindCommand(GoToBrowserCommand.GetCommandId(i));
                 if (command != null)
                 {
                     command.Visible = false;
                 }
             }
-        }
-
-        /// <summary>
-        /// Visual Studio のメッセージボックスを表示します。
-        /// </summary>
-        /// <param name="message">表示するメッセージ</param>
-        /// <param name="icon">表示するアイコン</param>
-        private void ShowMessageBox(string message, OLEMSGICON icon)
-        {
-            var uiShell = this.GetService<SVsUIShell, IVsUIShell>();
-            var clsid = Guid.Empty;
-            int result;
-            ErrorHandler.ThrowOnFailure(uiShell.ShowMessageBox(
-                0,
-                ref clsid,
-                Resources.CommandIsNotExecutable,
-                message,
-                string.Empty,
-                0,
-                OLEMSGBUTTON.OLEMSGBUTTON_OK,
-                OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST,
-                icon,
-                0,        // false
-                out result));
         }
     }
 }

@@ -140,8 +140,10 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandBase.cs" />
     <Compile Include="Configs\CommandMenuItem.cs" />
     <Compile Include="Configs\ExecuteMode.cs" />
+    <Compile Include="GoToBrowserCommand.cs" />
     <Compile Include="Guids.cs">
       <DependentUpon>GoToBrowser.vsct</DependentUpon>
     </Compile>
