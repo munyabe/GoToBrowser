@@ -23,10 +23,10 @@ namespace GoToBrowser
     // This attribute tells the PkgDef creation utility (CreatePkgDef.exe) that this class is
     // a package.
     [PackageRegistration(UseManagedResourcesOnly = true)]
-    // This attribute is needed to let the shell know that this package exposes some menus.
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [ProvideAutoLoad(UIContextGuids.SolutionExists)]
     [Guid(GuidList.guidGoToBrowserPkgString)]
+    [InstalledProductRegistration("#110", "#112", "2.2", IconResourceID = 400)] // Visual Studio のヘルプ/バージョン情報に表示される情報です。
     public sealed partial class GoToBrowserPackage : Package
     {
         /// <summary>
