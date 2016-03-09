@@ -26,7 +26,7 @@ namespace GoToBrowser
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [ProvideAutoLoad(UIContextGuids.SolutionExists)]
     [Guid(GuidList.guidGoToBrowserPkgString)]
-    [InstalledProductRegistration("#110", "#112", "2.2", IconResourceID = 400)] // Visual Studio のヘルプ/バージョン情報に表示される情報です。
+    [InstalledProductRegistration("#110", "#112", "2.3", IconResourceID = 400)] // Visual Studio のヘルプ/バージョン情報に表示される情報です。
     public sealed partial class GoToBrowserPackage : Package
     {
         /// <summary>
