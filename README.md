@@ -1,6 +1,8 @@
 GoToBrowser
 ===========
 
+[![Build status](https://ci.appveyor.com/api/projects/status/txlqrtje3n7oyvpc?svg=true)](https://ci.appveyor.com/project/munyabe/gotobrowser)
+
 This is a visual studio extension, that goes to a web browser on your repository.
 If you use a web-based source code review tool, this extension can help you access a code and add comments.
 It is also available through [Visual Studio Gallery](http://visualstudiogallery.msdn.microsoft.com/784dd162-53e2-40ff-a8e6-eb6a4bb9acc8).
