@@ -4,7 +4,7 @@
     <Identity Id="cd8f7ba3-3b25-4272-9b03-be6e009378da" Version="2.3" Language="en-US" Publisher="munyabe" />
     <DisplayName>Go to Browser</DisplayName>
     <Description>This is a visual studio extension, that goes to a web browser on your repository.</Description>
-    <MoreInfo>http://visualstudiogallery.msdn.microsoft.com/784dd162-53e2-40ff-a8e6-eb6a4bb9acc8</MoreInfo>
+    <MoreInfo>https://marketplace.visualstudio.com/items?itemName=munyabe.GotoBrowser</MoreInfo>
     <License>License.txt</License>
     <Icon>Resources\GoToBrowser.ico</Icon>
     <PreviewImage>Resources\Preview.png</PreviewImage>
