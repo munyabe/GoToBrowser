@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="cd8f7ba3-3b25-4272-9b03-be6e009378da" Version="2.5" Language="en-US" Publisher="munyabe" />
+        <Identity Id="cd8f7ba3-3b25-4272-9b03-be6e009378da" Version="2.6" Language="en-US" Publisher="munyabe" />
         <DisplayName>Go to Browser</DisplayName>
         <Description>This is a visual studio extension, that goes to a web browser on your repository.</Description>
         <MoreInfo>https://marketplace.visualstudio.com/items?itemName=munyabe.GotoBrowser</MoreInfo>
